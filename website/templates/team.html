@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Team: {{ team.name }}{% endblock %}
+
+{% block content %}
+  <h2>{{ team.name }}</h2>
+  <p>Leader: {{ team.leader_id }}</p>
+  <p>Score: <strong>{{ team.score.points if team.score else 0 }}</strong></p>
+
+  <h5>Members</h5>
+  <ul class="list-group mb-3">
+    {% for m in team.members %}
+      <li class="list-group-item">{{ m.full_name }} ({{ m.email }})</li>
+    {% endfor %}
+  </ul>
+
+  {% if session.get('user_id') == team.leader_id %}
+    <form method="post" action="{{ url_for('views.add_member', team_id=team.id) }}">
+      <div class="input-group">
+        <input name="email" class="form-control" placeholder="Member email" required />
+        <button class="btn btn-outline-primary">Add member</button>
+      </div>
+    </form>
+  {% endif %}
+
+{% endblock %}

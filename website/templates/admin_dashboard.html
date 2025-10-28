@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+  <h2>Admin Dashboard</h2>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Post Announcement</h4>
+      <form method="post" action="{{ url_for('views.admin_announce') }}">
+        <div class="mb-3">
+          <input name="title" class="form-control" placeholder="Title" required />
+        </div>
+        <div class="mb-3">
+          <textarea name="body" class="form-control" rows="4" placeholder="Body" required></textarea>
+        </div>
+        <button class="btn btn-success">Post</button>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <h4>Update Scores</h4>
+      <form method="post" action="{{ url_for('views.admin_update_score') }}">
+        <div class="mb-3">
+          <select name="team_id" class="form-select">
+            {% for t in teams %}
+              <option value="{{ t.id }}">{{ t.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <input name="points" class="form-control" placeholder="Points" required />
+        </div>
+        <button class="btn btn-primary">Update</button>
+      </form>
+    </div>
+  </div>
+
+  <hr />
+
+  <h4>Recent Announcements</h4>
+  {% for ann in announcements %}
+    <div class="card mb-2">
+      <div class="card-body">
+        <h5 class="card-title">{{ ann.title }}</h5>
+        <p class="card-text">{{ ann.body }}</p>
+      </div>
+    </div>
+  {% endfor %}
+
+  <hr />
+
+  <a href="{{ url_for('views.admin_users') }}" class="btn btn-outline-secondary">View users</a>
+
+{% endblock %}
