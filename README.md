@@ -1,9 +1,7 @@
 # ECELL Hackathon Web App
 
-This repository contains a small Flask web application converted into a hackathon platform.
+This repository contains a small Flask web application hackathon platform.
 It provides user and admin dashboards, team creation and membership, announcements, and a live leaderboard (score updates).
-
-The project was adapted from a simple parking app skeleton — the Bootstrap UI is preserved via CDN and new templates are placed under `website/templates/`.
 
 ## Features
 
